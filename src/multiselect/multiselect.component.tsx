@@ -55,7 +55,8 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
 			showCheckbox: props.showCheckbox,
       keepSearchTerm: props.keepSearchTerm,
       groupedObject: [],
-      closeIconType: closeIconTypes[props.closeIcon] || closeIconTypes['circle']
+      closeIconType: closeIconTypes[props.closeIcon] || closeIconTypes['circle'],
+      hideSelectedList: props.hideSelectedList,
     };
     // @ts-ignore
     this.optionTimeout = null;
@@ -254,10 +255,11 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
       highlightOption,
       toggleOptionsList,
       inputValue,
-      selectedValues
+      selectedValues,
+      hideSelectedList
     } = this.state;
     const { disablePreSelectedValues } = this.props;
-    if (e.keyCode === 8 && !inputValue && !disablePreSelectedValues && selectedValues.length) {
+    if (e.keyCode === 8 && !inputValue && !disablePreSelectedValues && selectedValues.length && !hideSelectedList) {
       this.onRemoveSelectedItem(selectedValues.length - 1);
     }
     if (!options.length) {
